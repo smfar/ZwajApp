@@ -26,6 +26,7 @@ namespace ZwajApp.API.Controllers
            _config = config;
         }
         [HttpPost("register")]
+         [AllowAnonymous]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             //validation
@@ -41,6 +42,7 @@ namespace ZwajApp.API.Controllers
         }
         
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult>Login(UserForLoginDto userForLoginDto){
             var userFromRepo = await _repo.Login(userForLoginDto.username.ToLower(),userForLoginDto.password);
             if(userFromRepo == null) return Unauthorized();
